@@ -14,7 +14,7 @@ func (d *Dao) CheckUser(c *gin.Context, userName string, password string) (*ent.
 	if err != nil {
 
 	}
-	return nil, nil
+	return user, nil
 }
 func (d *Dao) FindUser(c context.Context) (*ent.User, error) {
 	return nil, nil
