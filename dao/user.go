@@ -1,7 +1,6 @@
 package dao
 
 import (
-	"context"
 	"github.com/gin-gonic/gin"
 	"go-gateway/ent"
 	"go-gateway/ent/user"
@@ -14,8 +13,20 @@ func (d *Dao) CheckUser(c *gin.Context, userName string, password string) (*ent.
 	if err != nil {
 
 	}
+
 	return user, nil
 }
-func (d *Dao) FindUser(c context.Context) (*ent.User, error) {
-	return nil, nil
+func (d *Dao) FindUser(c *gin.Context, id int) (*ent.User, error) {
+	model, err := d.client.User.Query().
+		Where(user.IDEQ(id)).
+		Only(c)
+	return model, err
+}
+
+func (d *Dao) SaveUser(c *gin.Context, user ent.User) error {
+	_, err := d.client.User.Create().
+		SetID(user.ID).
+		SetCreateAt(user.CreateAt).
+		Save(c)
+	return err
 }
