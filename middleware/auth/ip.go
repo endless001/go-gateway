@@ -1,23 +1,23 @@
 package auth
 
 import (
-    "errors"
-    "fmt"
-    "github.com/e421083458/go_gateway/golang_common/lib"
-    "github.com/gin-gonic/gin"
+	"errors"
+	"fmt"
+	"github.com/e421083458/go_gateway/golang_common/lib"
+	"github.com/gin-gonic/gin"
 	"go-gateway/middleware"
 )
 
 func IpAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		isMatched :=false
-		for _,host:=range lib.GetStringSliceConf("base.http.allow_ip"){
-			if c.ClientIP() == host{
+		isMatched := false
+		for _, host := range lib.GetStringSliceConf("base.http.allow_ip") {
+			if c.ClientIP() == host {
 				isMatched = true
 			}
 		}
 		if !isMatched {
-			middleware.ResponseError(c, InternalErrorCode, errors.New(fmt.Sprintf("%v,not in iplist", c.ClientIP())))
+			middleware.ResponseError(c, middleware.InternalErrorCode, errors.New(fmt.Sprintf("%v,not in iplist", c.ClientIP())))
 			c.Abort()
 			return
 		}

@@ -8,15 +8,93 @@ import (
 	"go-gateway/ent"
 )
 
-// The TenantFunc type is an adapter to allow the use of ordinary
-// function as Tenant mutator.
-type TenantFunc func(context.Context, *ent.TenantMutation) (ent.Value, error)
+// The AccessControlFunc type is an adapter to allow the use of ordinary
+// function as AccessControl mutator.
+type AccessControlFunc func(context.Context, *ent.AccessControlMutation) (ent.Value, error)
 
 // Mutate calls f(ctx, m).
-func (f TenantFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
-	mv, ok := m.(*ent.TenantMutation)
+func (f AccessControlFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	mv, ok := m.(*ent.AccessControlMutation)
 	if !ok {
-		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.TenantMutation", m)
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.AccessControlMutation", m)
+	}
+	return f(ctx, mv)
+}
+
+// The AppFunc type is an adapter to allow the use of ordinary
+// function as App mutator.
+type AppFunc func(context.Context, *ent.AppMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f AppFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	mv, ok := m.(*ent.AppMutation)
+	if !ok {
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.AppMutation", m)
+	}
+	return f(ctx, mv)
+}
+
+// The GrpcRuleFunc type is an adapter to allow the use of ordinary
+// function as GrpcRule mutator.
+type GrpcRuleFunc func(context.Context, *ent.GrpcRuleMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f GrpcRuleFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	mv, ok := m.(*ent.GrpcRuleMutation)
+	if !ok {
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.GrpcRuleMutation", m)
+	}
+	return f(ctx, mv)
+}
+
+// The HttpRuleFunc type is an adapter to allow the use of ordinary
+// function as HttpRule mutator.
+type HttpRuleFunc func(context.Context, *ent.HttpRuleMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f HttpRuleFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	mv, ok := m.(*ent.HttpRuleMutation)
+	if !ok {
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.HttpRuleMutation", m)
+	}
+	return f(ctx, mv)
+}
+
+// The LoadBalanceFunc type is an adapter to allow the use of ordinary
+// function as LoadBalance mutator.
+type LoadBalanceFunc func(context.Context, *ent.LoadBalanceMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f LoadBalanceFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	mv, ok := m.(*ent.LoadBalanceMutation)
+	if !ok {
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.LoadBalanceMutation", m)
+	}
+	return f(ctx, mv)
+}
+
+// The ServiceFunc type is an adapter to allow the use of ordinary
+// function as Service mutator.
+type ServiceFunc func(context.Context, *ent.ServiceMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f ServiceFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	mv, ok := m.(*ent.ServiceMutation)
+	if !ok {
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.ServiceMutation", m)
+	}
+	return f(ctx, mv)
+}
+
+// The TcpRuleFunc type is an adapter to allow the use of ordinary
+// function as TcpRule mutator.
+type TcpRuleFunc func(context.Context, *ent.TcpRuleMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f TcpRuleFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	mv, ok := m.(*ent.TcpRuleMutation)
+	if !ok {
+		return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.TcpRuleMutation", m)
 	}
 	return f(ctx, mv)
 }

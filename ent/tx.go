@@ -12,8 +12,20 @@ import (
 // Tx is a transactional client that is created by calling Client.Tx().
 type Tx struct {
 	config
-	// Tenant is the client for interacting with the Tenant builders.
-	Tenant *TenantClient
+	// AccessControl is the client for interacting with the AccessControl builders.
+	AccessControl *AccessControlClient
+	// App is the client for interacting with the App builders.
+	App *AppClient
+	// GrpcRule is the client for interacting with the GrpcRule builders.
+	GrpcRule *GrpcRuleClient
+	// HttpRule is the client for interacting with the HttpRule builders.
+	HttpRule *HttpRuleClient
+	// LoadBalance is the client for interacting with the LoadBalance builders.
+	LoadBalance *LoadBalanceClient
+	// Service is the client for interacting with the Service builders.
+	Service *ServiceClient
+	// TcpRule is the client for interacting with the TcpRule builders.
+	TcpRule *TcpRuleClient
 	// User is the client for interacting with the User builders.
 	User *UserClient
 
@@ -151,7 +163,13 @@ func (tx *Tx) Client() *Client {
 }
 
 func (tx *Tx) init() {
-	tx.Tenant = NewTenantClient(tx.config)
+	tx.AccessControl = NewAccessControlClient(tx.config)
+	tx.App = NewAppClient(tx.config)
+	tx.GrpcRule = NewGrpcRuleClient(tx.config)
+	tx.HttpRule = NewHttpRuleClient(tx.config)
+	tx.LoadBalance = NewLoadBalanceClient(tx.config)
+	tx.Service = NewServiceClient(tx.config)
+	tx.TcpRule = NewTcpRuleClient(tx.config)
 	tx.User = NewUserClient(tx.config)
 }
 
@@ -162,7 +180,7 @@ func (tx *Tx) init() {
 // of them in order to commit or rollback the transaction.
 //
 // If a closed transaction is embedded in one of the generated entities, and the entity
-// applies a query, for example: Tenant.QueryXXX(), the query will be executed
+// applies a query, for example: AccessControl.QueryXXX(), the query will be executed
 // through the driver which created this transaction.
 //
 // Note that txDriver is not goroutine safe.

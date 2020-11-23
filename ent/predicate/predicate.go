@@ -6,8 +6,26 @@ import (
 	"github.com/facebook/ent/dialect/sql"
 )
 
-// Tenant is the predicate function for tenant builders.
-type Tenant func(*sql.Selector)
+// AccessControl is the predicate function for accesscontrol builders.
+type AccessControl func(*sql.Selector)
+
+// App is the predicate function for app builders.
+type App func(*sql.Selector)
+
+// GrpcRule is the predicate function for grpcrule builders.
+type GrpcRule func(*sql.Selector)
+
+// HttpRule is the predicate function for httprule builders.
+type HttpRule func(*sql.Selector)
+
+// LoadBalance is the predicate function for loadbalance builders.
+type LoadBalance func(*sql.Selector)
+
+// Service is the predicate function for service builders.
+type Service func(*sql.Selector)
+
+// TcpRule is the predicate function for tcprule builders.
+type TcpRule func(*sql.Selector)
 
 // User is the predicate function for user builders.
 type User func(*sql.Selector)
