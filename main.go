@@ -2,7 +2,7 @@ package main
 
 import (
 	"go-gateway/conf"
-	"go-gateway/http"
+	"go-gateway/server/http"
 )
 
 func main() {

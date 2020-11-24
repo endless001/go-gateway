@@ -50,7 +50,7 @@ func Stop() {
 func InitializeRoter(middlewares ...gin.HandlerFunc) *gin.Engine {
 	router := gin.Default()
 	//router.Use(middlewares...)
-	router.GET("/", func(c *gin.Context) {
+	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
