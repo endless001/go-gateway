@@ -7,7 +7,7 @@ import (
 	"go-gateway/middleware"
 )
 
-func HttPFlowCountMiddleware() gin.HandlerFunc {
+func HttpFlowCountMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		_, ok := c.Get("service")
 		if !ok {
