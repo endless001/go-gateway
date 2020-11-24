@@ -1,7 +1,13 @@
 package main
 
+import (
+	"go-gateway/conf"
+	"go-gateway/http"
+)
 
 func main() {
-    app := App{}
-    app.Run()
+
+	c := &conf.Config{}
+	http.Init(c)
+
 }

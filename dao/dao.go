@@ -2,18 +2,20 @@ package dao
 
 import (
 	"context"
+	"go-gateway/conf"
 	"go-gateway/ent"
 )
 
 type Dao struct {
-	c string
+	c      *conf.Config
 	client *ent.Client
 }
-func New(c string) (d *Dao) {
-	client,_:=ent.Open("mysql", c)
+
+func New(c *conf.Config) (d *Dao) {
+	client, _ := ent.Open("mysql", "")
 	d = &Dao{
-		c: c,
-		client:client,
+		c:      c,
+		client: client,
 	}
 	return
 }

@@ -28,3 +28,10 @@ func (d *Dao) AppList(c *gin.Context, pageIndex int, pageSize int) ([]*ent.App, 
 		All(c)
 	return appList, 1, err
 }
+
+func (d *Dao) GetApp(c *gin.Context, appId string, secret string) (*ent.App, error) {
+	model, err := d.client.App.Query().
+		Where(app.AppIDEQ(appId), app.Secret(secret)).
+		Only(c)
+	return model, err
+}

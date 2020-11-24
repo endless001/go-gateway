@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/denisenkom/go-mssqldb v0.9.0 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/e421083458/go_gateway v0.0.0-20200620084504-d602eb8bc883
 	github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 // indirect
 	github.com/facebook/ent v0.5.0
