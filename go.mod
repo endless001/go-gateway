@@ -13,5 +13,6 @@ require (
 	github.com/go-playground/locales v0.13.0
 	github.com/go-playground/universal-translator v0.17.0
 	github.com/jinzhu/now v1.1.1 // indirect
+	github.com/sirupsen/logrus v1.2.0
 	gopkg.in/go-playground/validator.v9 v9.29.0
 )
