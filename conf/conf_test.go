@@ -7,24 +7,6 @@ import (
 	"testing"
 )
 
-type Config1 struct {
-	SiteConfig  *SiteConfig
-	NginxConfig *NginxConfig
-}
-
-type SiteConfig struct {
-	HttpPort  int
-	HttpsOn   bool
-	Domain    string
-	HttpsPort int
-}
-
-type NginxConfig struct {
-	Port    int
-	LogPath string
-	Path    string
-}
-
 //配置文件中字母要小写，结构体属性首字母要大写
 
 type Myconf struct {
