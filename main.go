@@ -14,7 +14,7 @@ func init() {
 	log.SetOutput(os.Stdout)
 
 	// 设置日志级别为warn以上
-	log.SetLevel(log.WarnLevel)
+	log.SetLevel(1)
 }
 
 func main() {

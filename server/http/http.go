@@ -21,19 +21,19 @@ func Init(c *conf.Config) {
 	d = dao.New(c)
 	r := InitializeRoter()
 	HttpServer = &http.Server{
-		Addr:           lib.GetStringConf("base.http.addr"),
+		Addr:           c.Server.Address,
 		Handler:        r,
-		ReadTimeout:    time.Duration(lib.GetIntConf("base.http.read_timeout")) * time.Second,
-		WriteTimeout:   time.Duration(lib.GetIntConf("base.http.write_timeout")) * time.Second,
-		MaxHeaderBytes: 1 << uint(lib.GetIntConf("base.http.max_header_bytes")),
+		ReadTimeout:    time.Duration(c.Server.ReadTimeout) * time.Second,
+		WriteTimeout:   time.Duration(c.Server.ReadTimeout) * time.Second,
+		MaxHeaderBytes: 1 << uint(c.Server.MaxHeaderBytes),
 	}
 }
 
 func Run() {
 	go func() {
-		log.Printf("[INFO] HttpServer run %v\n", lib.GetStringConf("base.http.addr"))
+		log.Printf("[INFO] HttpServer run %v\n", conf.Conf.Server.Address)
 		if err := HttpServer.ListenAndServe(); err != nil {
-			log.Fatalf(" [ERROR] HttpServer run:%s\n", lib.GetStringConf("base.http.addr"), err)
+			log.Fatalf(" [ERROR] HttpServer run:%s\n", conf.Conf.Server.Address, err)
 		}
 	}()
 }

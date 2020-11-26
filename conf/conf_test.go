@@ -2,8 +2,15 @@ package conf
 
 import (
 	"fmt"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
 	"testing"
 )
+
+type Config1 struct {
+	SiteConfig  *SiteConfig
+	NginxConfig *NginxConfig
+}
 
 type SiteConfig struct {
 	HttpPort  int
@@ -18,19 +25,41 @@ type NginxConfig struct {
 	Path    string
 }
 
-func TestConfigYaml(t *testing.T) {
-	c2 := ConfigEngine{}
-	c2.Load("test.yaml")
+//配置文件中字母要小写，结构体属性首字母要大写
 
-	siteConf := SiteConfig{}
-	c2.GetStruct("Site", &siteConf)
-	fmt.Println(siteConf)
+type Myconf struct {
+	Ipport             string
+	StartSendTime      string
+	SendMaxCountPerDay int
+	Devices            []Device
+	WarnFrequency      int
+	SendFrequency      int
+}
+type Device struct {
+	DevId string
+	Nodes []Node
+}
+type Node struct {
+	PkId     string
+	BkId     string
+	Index    string
+	MinValue float32
+	MaxValue float32
+	DataType string
+}
 
-	nginxConfig := NginxConfig{}
-	c2.GetStruct("Nginx", &nginxConfig)
-	fmt.Println(nginxConfig)
-
-	siteName := c2.GetString("SiteName")
-	siteAddr := c2.GetString("SiteAddr")
-	fmt.Println(siteName, siteAddr)
+func TestConfigYamlAll(t *testing.T) {
+	data, _ := ioutil.ReadFile("config.yaml")
+	fmt.Println(string(data))
+	c := Myconf{}
+	//把yaml形式的字符串解析成struct类型
+	yaml.Unmarshal(data, &c)
+	fmt.Println("初始数据", c)
+	if c.Ipport == "" {
+		fmt.Println("配置文件设置错误")
+		return
+	}
+	d, _ := yaml.Marshal(&c)
+	fmt.Println("看看 :", string(d))
+	fmt.Println(c.Devices[1].DevId)
 }

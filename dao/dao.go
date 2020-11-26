@@ -12,7 +12,7 @@ type Dao struct {
 }
 
 func New(c *conf.Config) (d *Dao) {
-	client, _ := ent.Open("mysql", "")
+	client, _ := ent.Open(c.DataBase.DriverName, c.DataBase.DataSourceName)
 	d = &Dao{
 		c:      c,
 		client: client,

@@ -3,15 +3,15 @@ package auth
 import (
 	"errors"
 	"fmt"
-	"github.com/e421083458/go_gateway/golang_common/lib"
 	"github.com/gin-gonic/gin"
+	"go-gateway/conf"
 	"go-gateway/middleware"
 )
 
 func IpAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		isMatched := false
-		for _, host := range lib.GetStringSliceConf("base.http.allow_ip") {
+		for _, host := range conf.Conf.Server.AllowIp {
 			if c.ClientIP() == host {
 				isMatched = true
 			}
