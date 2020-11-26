@@ -94,6 +94,7 @@ func (c *ConfigEngine) GetFloat64(name string) float64 {
 		return float64(0)
 	}
 }
+
 func (c *ConfigEngine) GetStruct(name string, s interface{}) interface{} {
 	d := c.Get(name)
 	switch d.(type) {

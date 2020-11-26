@@ -23,8 +23,8 @@ func TestConfigYaml(t *testing.T) {
 	c2.Load("test.yaml")
 
 	siteConf := SiteConfig{}
-	res := c2.GetStruct("Site", &siteConf)
-	fmt.Println(res)
+	c2.GetStruct("Site", &siteConf)
+	fmt.Println(siteConf)
 
 	nginxConfig := NginxConfig{}
 	c2.GetStruct("Nginx", &nginxConfig)
