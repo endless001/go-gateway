@@ -7,7 +7,6 @@ import (
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"go-gateway/ent"
-	"go-gateway/middleware"
 )
 
 func UserLogin(c *gin.Context) {
@@ -19,7 +18,7 @@ func UserInfo(c *gin.Context) {
 	sessInfo := sess.Get(public.AdminSessionInfoKey)
 	userInfo := &ent.User{}
 	if err := json.Unmarshal([]byte(fmt.Sprint(sessInfo)), userInfo); err != nil {
-		middleware.ResponseError(c, 2000, err)
+		//middleware.ResponseError(c, 2000, err)
 		return
 	}
 
