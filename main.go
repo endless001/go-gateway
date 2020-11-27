@@ -2,10 +2,13 @@ package main
 
 import (
 	log "github.com/sirupsen/logrus"
+	"go-gateway/conf"
+	"go-gateway/server/http"
 	"os"
 )
 
 func init() {
+	conf.Load("conf/config.yaml")
 	// 设置日志格式为json格式
 	log.SetFormatter(&log.JSONFormatter{})
 
@@ -14,14 +17,9 @@ func init() {
 	log.SetOutput(os.Stdout)
 
 	// 设置日志级别为warn以上
-	log.SetLevel(1)
+	log.SetLevel(log.WarnLevel)
 }
 
 func main() {
-
-	log.WithFields(log.Fields{
-		"animal": "walrus",
-		"size":   10,
-	}).Fatal("A group of walrus emerges from the ocean")
-
+	http.Run()
 }

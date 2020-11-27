@@ -12,8 +12,10 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/locales v0.13.0
 	github.com/go-playground/universal-translator v0.17.0
+	github.com/go-sql-driver/mysql v1.5.1-0.20200311113236-681ffa848bae
 	github.com/jinzhu/now v1.1.1 // indirect
 	github.com/sirupsen/logrus v1.2.0
 	gopkg.in/go-playground/validator.v9 v9.29.0
 	gopkg.in/yaml.v2 v2.2.8
+	honnef.co/go/tools v0.0.1-2019.2.3
 )

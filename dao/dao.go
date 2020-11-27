@@ -2,6 +2,7 @@ package dao
 
 import (
 	"context"
+	_ "github.com/go-sql-driver/mysql"
 	"go-gateway/conf"
 	"go-gateway/ent"
 )

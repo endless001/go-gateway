@@ -10,6 +10,10 @@ import (
 	"go-gateway/middleware"
 )
 
+func UserLogin(c *gin.Context) {
+
+}
+
 func UserInfo(c *gin.Context) {
 	sess := sessions.Default(c)
 	sessInfo := sess.Get(public.AdminSessionInfoKey)
@@ -19,5 +23,12 @@ func UserInfo(c *gin.Context) {
 		return
 	}
 
-	middleware.ResponseSuccess(c, userInfo)
+	//middleware.ResponseSuccess(c, userInfo)
+}
+
+func UserSignout(c *gin.Context) {
+	sess := sessions.Default(c)
+	sess.Delete(public.AdminSessionInfoKey)
+	sess.Save()
+	//middleware.ResponseSuccess(c, "ok")
 }

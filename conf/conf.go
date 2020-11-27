@@ -44,17 +44,13 @@ type Log struct {
 	Level string
 }
 
-func load(path string) (err error) {
+func Load(path string) (err error) {
 	data, err := ioutil.ReadFile(path)
-
 	if err != nil {
 		return nil
 	}
-
 	c := Config{}
-
 	yaml.Unmarshal(data, &c)
-
 	Conf = &c
 	return
 }

@@ -1,24 +1,23 @@
-ipport: 192.168.2.95:10000
-startsendtime: 2017-01-02 08:08:08
-sendmaxcountperday: 100
-devices:
-  - devid: 123456789
-    nodes:
-      - pkid: 0
-        bkid: 0
-        index: 0
-        minvalue: 0
-        maxvalue: 60
-        datatype: normal
-      - pkid: 0
-        bkid: 0
-        index: 0
-        datatype: boolean
-  - devid: 10001
-    nodes:
-      - pkid: 0
-        bkid: 1
-        index: 0
-        datatype: boolean
-warnfrequency: 10
-sendfrequency: 10
+server:
+  address: localhost:8000
+  readtimeout: 10
+  writetimeout: 10
+  maxheaderbytes: 10
+  allowip:
+    - 127.0.0.1
+    - 127.0.0.1
+database:
+  drivername: mysql
+  datasourcename: root:123456@tcp(47.103.25.179:3306)/ent?charset=utf8
+redis:
+  proxylist:
+    - 127.0.0.1:6789
+    - 127.0.0.1:6780
+    - 127.0.0.1:6781
+  password:
+  db:
+  conntimeout: 10
+  readtimeout: 10
+  writetimeout: 10
+log:
+  level: 1

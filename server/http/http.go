@@ -2,7 +2,6 @@ package http
 
 import (
 	"context"
-	"github.com/e421083458/go_gateway/golang_common/lib"
 	"github.com/gin-gonic/gin"
 	"go-gateway/conf"
 	"go-gateway/dao"
@@ -16,20 +15,17 @@ var (
 	HttpServer *http.Server
 )
 
-func Init(c *conf.Config) {
-	gin.SetMode(lib.GetStringConf("base.base.debug_mode"))
-	d = dao.New(c)
+func Run() {
+	gin.SetMode("release")
+	d = dao.New(conf.Conf)
 	r := InitializeRoter()
 	HttpServer = &http.Server{
-		Addr:           c.Server.Address,
+		Addr:           conf.Conf.Server.Address,
 		Handler:        r,
-		ReadTimeout:    time.Duration(c.Server.ReadTimeout) * time.Second,
-		WriteTimeout:   time.Duration(c.Server.ReadTimeout) * time.Second,
-		MaxHeaderBytes: 1 << uint(c.Server.MaxHeaderBytes),
+		ReadTimeout:    time.Duration(conf.Conf.Server.ReadTimeout) * time.Second,
+		WriteTimeout:   time.Duration(conf.Conf.Server.ReadTimeout) * time.Second,
+		MaxHeaderBytes: 1 << uint(conf.Conf.Server.MaxHeaderBytes),
 	}
-}
-
-func Run() {
 	go func() {
 		log.Printf("[INFO] HttpServer run %v\n", conf.Conf.Server.Address)
 		if err := HttpServer.ListenAndServe(); err != nil {
@@ -49,7 +45,7 @@ func Stop() {
 
 func InitializeRoter(middlewares ...gin.HandlerFunc) *gin.Engine {
 	router := gin.Default()
-	//router.Use(middlewares...)
+	router.Use(middlewares...)
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
