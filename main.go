@@ -1,10 +1,13 @@
 package main
 
 import (
+	"flag"
 	log "github.com/sirupsen/logrus"
 	"go-gateway/conf"
 	"go-gateway/server/http"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 func init() {
@@ -21,5 +24,9 @@ func init() {
 }
 
 func main() {
+	flag.Parse()
 	http.Run()
+	quit := make(chan os.Signal)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
 }
