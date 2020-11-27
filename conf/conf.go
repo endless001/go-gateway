@@ -6,8 +6,6 @@ import (
 )
 
 var (
-	confPath string
-	// Conf config
 	Conf = &Config{}
 )
 
