@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	log "github.com/sirupsen/logrus"
-	"go-gateway/conf"
+	"go-gateway/internal/conf"
 	"go-gateway/internal/server/http"
 	"os"
 	"os/signal"
