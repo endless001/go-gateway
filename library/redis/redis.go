@@ -1,12 +1,15 @@
 package redis
 
 import (
+	"errors"
+	"fmt"
 	"github.com/garyburd/redigo/redis"
+	log "github.com/sirupsen/logrus"
 	"math/rand"
 	"time"
 )
 
-type Redis struct {
+type RedisConfig struct {
 	ProxyList    []string
 	Password     string
 	Db           int
@@ -15,7 +18,7 @@ type Redis struct {
 	WriteTimeout int
 }
 
-func RedisConnFactory(redisConf Redis) (redis.Conn, error) {
+func RedisConnFactory(redisConf RedisConfig) (redis.Conn, error) {
 
 	randHost := redisConf.ProxyList[rand.Intn(len(redisConf.ProxyList))]
 
@@ -54,4 +57,63 @@ func RedisConnFactory(redisConf Redis) (redis.Conn, error) {
 	}
 	return c, nil
 
+}
+
+func RedisLogDo(c redis.Conn, commandName string, args ...interface{}) (interface{}, error) {
+
+	startExecTime := time.Now()
+	reply, err := c.Do(commandName, args...)
+	endExecTime := time.Now()
+
+	if err != nil {
+		log.WithFields(log.Fields{
+			"method":    commandName,
+			"err":       err,
+			"bind":      args,
+			"proc_time": fmt.Sprintf("%fs", endExecTime.Sub(startExecTime).Seconds()),
+		}).Error("_com_redis_failure")
+	} else {
+		replyStr, _ := redis.String(reply, nil)
+		log.WithFields(log.Fields{
+			"method":    commandName,
+			"bind":      args,
+			"reply":     replyStr,
+			"proc_time": fmt.Sprintf("%fs", endExecTime.Sub(startExecTime).Seconds()),
+		}).Info("_com_redis_success")
+	}
+	return reply, err
+}
+func RedisConfDo(redisConf RedisConfig, commandName string, args ...interface{}) (interface{}, error) {
+
+	c, err := RedisConnFactory(redisConf)
+	if err != nil {
+		log.WithFields(log.Fields{
+			"method": commandName,
+			"err":    errors.New("RedisConnFactory_error"),
+			"bind":   args,
+		}).Error("_com_redis_failure")
+	}
+	defer c.Close()
+	startExecTime := time.Now()
+	reply, err := c.Do(commandName, args...)
+	endExecTime := time.Now()
+
+	if err != nil {
+		log.WithFields(log.Fields{
+			"method":    commandName,
+			"err":       err,
+			"bind":      args,
+			"proc_time": fmt.Sprintf("%fs", endExecTime.Sub(startExecTime).Seconds()),
+		}).Error("_com_redis_failure")
+	} else {
+		replyStr, _ := redis.String(reply, nil)
+		log.WithFields(log.Fields{
+			"method":    commandName,
+			"bind":      args,
+			"reply":     replyStr,
+			"proc_time": fmt.Sprintf("%fs", endExecTime.Sub(startExecTime).Seconds()),
+		}).Info("_com_redis_success")
+	}
+
+	return reply, err
 }
