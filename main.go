@@ -4,7 +4,7 @@ import (
 	"flag"
 	log "github.com/sirupsen/logrus"
 	"go-gateway/conf"
-	"go-gateway/server/http"
+	"go-gateway/internal/server/http"
 	"os"
 	"os/signal"
 	"syscall"

@@ -2,13 +2,20 @@ package redis
 
 import (
 	"github.com/garyburd/redigo/redis"
-	"go-gateway/conf"
 	"math/rand"
 	"time"
 )
 
-func RedisConnFactory() (redis.Conn, error) {
-	redisConf := conf.Conf.Redis
+type Redis struct {
+	ProxyList    []string
+	Password     string
+	Db           int
+	ConnTimeout  int
+	ReadTimeout  int
+	WriteTimeout int
+}
+
+func RedisConnFactory(redisConf Redis) (redis.Conn, error) {
 
 	randHost := redisConf.ProxyList[rand.Intn(len(redisConf.ProxyList))]
 
