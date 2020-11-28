@@ -8,7 +8,7 @@ server:
     - 127.0.0.1
 database:
   drivername: mysql
-  datasourcename: root:123456@tcp(47.103.25.179:3306)/ent?charset=utf8
+  datasourcename: root:123456@tcp(127.0.0.1:3306)/ent?charset=utf8
 redis:
   proxylist:
     - 127.0.0.1:6789
