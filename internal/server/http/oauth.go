@@ -1,17 +1,12 @@
 package http
 
 import (
-	"encoding/base64"
-	"errors"
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"go-gateway/internal/middleware"
 	"go-gateway/internal/util"
-	"strings"
-	"time"
 )
 
+/**
 func Tokens(c *gin.Context) {
 
 	splits := strings.Split(c.GetHeader("Authorization"), " ")
@@ -51,11 +46,12 @@ func Tokens(c *gin.Context) {
 	middleware.ResponseError(c, 2005, errors.New("未匹配正确APP信息"))
 }
 
+*/
 func Signout(c *gin.Context) {
 
 	sess := sessions.Default(c)
 	sess.Delete(util.AdminSessionInfoKey)
 	sess.Save()
-	middleware.ResponseSuccess(c, "ok")
+	c.AbortWithStatusJSON(200, "ok")
 
 }

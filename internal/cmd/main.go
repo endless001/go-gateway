@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	conf.Load("conf/config.yaml")
+	conf.Load("internal/conf/config.yaml")
 	// 设置日志格式为json格式
 	log.SetFormatter(&log.JSONFormatter{})
 
@@ -24,6 +24,7 @@ func init() {
 }
 
 func main() {
+
 	flag.Parse()
 	http.Run()
 	quit := make(chan os.Signal)

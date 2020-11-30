@@ -6,7 +6,6 @@ import (
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"go-gateway/internal/ent"
-	"go-gateway/internal/middleware"
 	"go-gateway/internal/util"
 )
 
@@ -19,15 +18,17 @@ func UserInfo(c *gin.Context) {
 	sessInfo := sess.Get(util.AdminSessionInfoKey)
 	userInfo := &ent.User{}
 	if err := json.Unmarshal([]byte(fmt.Sprint(sessInfo)), userInfo); err != nil {
-		middleware.ResponseError(c, 2000, err)
+		c.AbortWithError(200, err)
 		return
 	}
-	middleware.ResponseSuccess(c, userInfo)
+	c.AbortWithStatusJSON(200, userInfo)
+	//middleware.ResponseSuccess(c, userInfo)
 }
 
 func UserSignout(c *gin.Context) {
 	sess := sessions.Default(c)
 	sess.Delete(util.AdminSessionInfoKey)
 	sess.Save()
-	middleware.ResponseSuccess(c, "ok")
+	c.AbortWithStatusJSON(200, "ok")
+	//middleware.ResponseSuccess(c, "ok")
 }
