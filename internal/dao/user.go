@@ -2,10 +2,10 @@ package dao
 
 import (
 	"errors"
-	"github.com/e421083458/go_gateway/public"
 	"github.com/gin-gonic/gin"
 	"go-gateway/internal/ent"
 	"go-gateway/internal/ent/user"
+	"go-gateway/internal/util"
 )
 
 func (d *Dao) CheckUser(c *gin.Context, userName string, password string) (*ent.User, error) {
@@ -16,7 +16,7 @@ func (d *Dao) CheckUser(c *gin.Context, userName string, password string) (*ent.
 	if err != nil {
 		return nil, errors.New("用户名不存在!")
 	}
-	saltPassword := public.GenSaltPassword(user.Salt, password)
+	saltPassword := util.GenSaltPassword(user.Salt, password)
 
 	if user.Password != saltPassword {
 		return nil, errors.New("密码错误请重新输入!")
