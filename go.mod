@@ -14,9 +14,11 @@ require (
 	github.com/go-playground/locales v0.13.0
 	github.com/go-playground/universal-translator v0.17.0
 	github.com/go-sql-driver/mysql v1.5.1-0.20200311113236-681ffa848bae
+	github.com/gorilla/sessions v1.2.1 // indirect
 	github.com/jinzhu/now v1.1.1 // indirect
 	github.com/mwitkow/grpc-proxy v0.0.0-20181017164139-0f1106ef9c76
 	github.com/sirupsen/logrus v1.2.0
+	golang.org/x/time v0.0.0-20200416051211-89c76fbcd5d1
 	google.golang.org/grpc v1.30.0-dev.1
 	gopkg.in/go-playground/validator.v9 v9.29.0
 	gopkg.in/yaml.v2 v2.2.8

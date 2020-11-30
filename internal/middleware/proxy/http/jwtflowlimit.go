@@ -3,9 +3,10 @@ package http
 import (
 	"errors"
 	"fmt"
-	"github.com/e421083458/go_gateway/public"
 	"github.com/gin-gonic/gin"
+	"go-gateway/internal/flow/handler"
 	"go-gateway/internal/middleware"
+	"go-gateway/internal/util"
 )
 
 func HttpJwtFlowLimtMiddleware() gin.HandlerFunc {
@@ -16,8 +17,8 @@ func HttpJwtFlowLimtMiddleware() gin.HandlerFunc {
 			return
 		}
 		if true {
-			clientLimiter, err := public.FlowLimiterHandler.GetLimiter(
-				public.FlowAppPrefix+"_"+c.ClientIP(),
+			clientLimiter, err := handler.FlowLimiterHandler.GetLimiter(
+				util.FlowAppPrefix+"_"+c.ClientIP(),
 				float64(0))
 			if err != nil {
 				middleware.ResponseError(c, 5001, err)

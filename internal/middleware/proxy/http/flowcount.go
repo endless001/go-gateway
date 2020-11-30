@@ -2,9 +2,10 @@ package http
 
 import (
 	"errors"
-	"github.com/e421083458/go_gateway/public"
 	"github.com/gin-gonic/gin"
+	"go-gateway/internal/flow/handler"
 	"go-gateway/internal/middleware"
+	"go-gateway/internal/util"
 )
 
 func HttpFlowCountMiddleware() gin.HandlerFunc {
@@ -15,7 +16,7 @@ func HttpFlowCountMiddleware() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		totalCounter, err := public.FlowCounterHandler.GetCounter(public.FlowTotal)
+		totalCounter, err := handler.FlowCounterHandler.GetCounter(util.FlowTotal)
 		if err != nil {
 			middleware.ResponseError(c, 4001, err)
 			c.Abort()
@@ -23,7 +24,7 @@ func HttpFlowCountMiddleware() gin.HandlerFunc {
 		}
 		totalCounter.Increase()
 
-		serviceCounter, err := public.FlowCounterHandler.GetCounter(public.FlowServicePrefix)
+		serviceCounter, err := handler.FlowCounterHandler.GetCounter(util.FlowServicePrefix)
 		if err != nil {
 			middleware.ResponseError(c, 4001, err)
 			c.Abort()

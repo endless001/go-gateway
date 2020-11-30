@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"go-gateway/conf"
+	"go-gateway/internal/conf"
 	"go-gateway/internal/middleware"
 )
 

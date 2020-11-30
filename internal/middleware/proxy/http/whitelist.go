@@ -3,9 +3,9 @@ package http
 import (
 	"errors"
 	"fmt"
-	"github.com/e421083458/go_gateway/public"
 	"github.com/gin-gonic/gin"
 	"go-gateway/internal/middleware"
+	"go-gateway/internal/util"
 )
 
 func HttpWhiteListMiddleware() gin.HandlerFunc {
@@ -17,7 +17,7 @@ func HttpWhiteListMiddleware() gin.HandlerFunc {
 			return
 		}
 		iplist := []string{}
-		if !public.InStringSlice(iplist, c.ClientIP()) {
+		if !util.InStringSlice(iplist, c.ClientIP()) {
 			middleware.ResponseError(c, 3001, errors.New(fmt.Sprintf("%s not in white ip list", c.ClientIP())))
 			c.Abort()
 			return
