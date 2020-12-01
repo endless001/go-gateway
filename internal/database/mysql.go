@@ -1,6 +1,7 @@
 package database
 
 import (
+	_ "github.com/go-sql-driver/mysql"
 	"go-gateway/internal/conf"
 	"go-gateway/internal/ent"
 )

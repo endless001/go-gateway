@@ -2,7 +2,6 @@ package service
 
 import (
 	"fmt"
-	"github.com/e421083458/go_gateway/golang_common/lib"
 	"sync/atomic"
 	"time"
 )
@@ -46,12 +45,12 @@ func NewRedisFlowCountService(appId string, interval time.Duration) *RedisFlowCo
 	return reqCounter
 }
 func (o *RedisFlowCountService) GetDayKey(t time.Time) string {
-	day := t.In(lib.TimeLocation).Format("20060102")
+	day := t.In(time.Local).Format("20060102")
 	return fmt.Sprintf("%s_%s_%s", RedisFlowDayKey, day, o.AppID)
 }
 
 func (o *RedisFlowCountService) GetHourKey(t time.Time) string {
-	hourStr := t.In(lib.TimeLocation).Format("2006010215")
+	hourStr := t.In(time.Local).Format("2006010215")
 	return fmt.Sprintf("%s_%s_%s", RedisFlowHourKey, hourStr, o.AppID)
 }
 

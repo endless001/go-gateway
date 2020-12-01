@@ -1,8 +1,11 @@
 package router
 
 import (
+	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"go-gateway/internal/controller"
+	"go-gateway/internal/middleware"
+	"log"
 )
 
 func RegisterRoutes(middlewares ...gin.HandlerFunc) *gin.Engine {
@@ -16,7 +19,6 @@ func RegisterRoutes(middlewares ...gin.HandlerFunc) *gin.Engine {
 		})
 	})
 
-	/**
 	store, err := sessions.NewRedisStore(10, "tcp", "47.103.25.179:6379",
 		"", []byte("secret"))
 
@@ -24,10 +26,12 @@ func RegisterRoutes(middlewares ...gin.HandlerFunc) *gin.Engine {
 		log.Fatalf("sessions.NewRedisStore err:%v", err)
 	}
 
-
-	*/
 	userRouter := router.Group("/user")
-	userRouter.Use()
+
+	userRouter.Use(sessions.Sessions("session", store),
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		middleware.TranslationMiddleware())
 	{
 		controller.UserRegister(userRouter)
 	}

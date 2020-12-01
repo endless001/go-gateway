@@ -12,6 +12,7 @@ import (
 
 func init() {
 	conf.Load("internal/conf/config.yaml")
+
 	database.New(conf.Conf)
 	// 设置日志格式为json格式
 	log.SetFormatter(&log.JSONFormatter{})

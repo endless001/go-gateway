@@ -12,10 +12,10 @@ type UserService struct {
 	ud *dao.UserDao
 }
 
-func (s *UserService) CheckUser(c *gin.Context, userName string, password string) (*ent.User, error) {
+func (s *UserService) CheckUser(c *gin.Context, userName, password string) (*ent.User, error) {
 	s.ud = new(dao.UserDao)
 
-	user, err := s.ud.CheckUser(c, userName, password)
+	user, err := s.ud.CheckUser(c, userName)
 
 	if err != nil {
 		return nil, errors.New("用户名不存在!")
