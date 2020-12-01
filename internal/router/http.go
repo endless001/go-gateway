@@ -14,7 +14,7 @@ var (
 )
 
 func Run() {
-	gin.SetMode("release")
+	gin.SetMode("debug")
 	r := RegisterRoutes()
 	HttpServer = &http.Server{
 		Addr:           conf.Conf.Server.Address,

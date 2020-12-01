@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	log "github.com/sirupsen/logrus"
 	"go-gateway/internal/conf"
 	"go-gateway/internal/database"
@@ -27,9 +26,10 @@ func init() {
 
 func main() {
 
-	flag.Parse()
 	router.Run()
 	quit := make(chan os.Signal)
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	signal.Notify(quit, syscall.SIGKILL, syscall.SIGQUIT, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
+
+	router.Stop()
 }

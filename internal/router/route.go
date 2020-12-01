@@ -6,6 +6,7 @@ import (
 )
 
 func RegisterRoutes(middlewares ...gin.HandlerFunc) *gin.Engine {
+
 	router := gin.Default()
 
 	router.Use(middlewares...)
@@ -32,4 +33,5 @@ func RegisterRoutes(middlewares ...gin.HandlerFunc) *gin.Engine {
 	}
 
 	return router
+
 }
