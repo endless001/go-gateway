@@ -4,7 +4,8 @@ import (
 	"flag"
 	log "github.com/sirupsen/logrus"
 	"go-gateway/internal/conf"
-	"go-gateway/internal/server/http"
+	"go-gateway/internal/database"
+	"go-gateway/internal/router"
 	"os"
 	"os/signal"
 	"syscall"
@@ -12,6 +13,7 @@ import (
 
 func init() {
 	conf.Load("internal/conf/config.yaml")
+	database.New(conf.Conf)
 	// 设置日志格式为json格式
 	log.SetFormatter(&log.JSONFormatter{})
 
@@ -26,7 +28,7 @@ func init() {
 func main() {
 
 	flag.Parse()
-	http.Run()
+	router.Run()
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit

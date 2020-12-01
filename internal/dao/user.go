@@ -3,13 +3,17 @@ package dao
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
+	"go-gateway/internal/database"
 	"go-gateway/internal/ent"
 	"go-gateway/internal/ent/user"
 	"go-gateway/internal/util"
 )
 
-func (d *Dao) CheckUser(c *gin.Context, userName string, password string) (*ent.User, error) {
-	user, err := d.client.User.Query().
+type UserDao struct {
+}
+
+func (d *UserDao) CheckUser(c *gin.Context, userName string, password string) (*ent.User, error) {
+	user, err := database.Client.User.Query().
 		Where(user.UsernameEQ(userName), user.IsDeleteEQ(0)).
 		Only(c)
 
@@ -24,15 +28,15 @@ func (d *Dao) CheckUser(c *gin.Context, userName string, password string) (*ent.
 
 	return user, nil
 }
-func (d *Dao) FindUser(c *gin.Context, id int) (*ent.User, error) {
-	model, err := d.client.User.Query().
+func (d *UserDao) FindUser(c *gin.Context, id int) (*ent.User, error) {
+	model, err := database.Client.User.Query().
 		Where(user.IDEQ(id)).
 		Only(c)
 	return model, err
 }
 
-func (d *Dao) SaveUser(c *gin.Context, user ent.User) error {
-	_, err := d.client.User.Create().
+func (d *UserDao) SaveUser(c *gin.Context, user ent.User) error {
+	_, err := database.Client.User.Create().
 		SetID(user.ID).
 		SetCreateAt(user.CreateAt).
 		Save(c)

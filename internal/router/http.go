@@ -1,24 +1,21 @@
-package http
+package router
 
 import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"go-gateway/internal/conf"
-	"go-gateway/internal/dao"
 	"log"
 	"net/http"
 	"time"
 )
 
 var (
-	d          *dao.Dao
 	HttpServer *http.Server
 )
 
 func Run() {
 	gin.SetMode("release")
-	d = dao.New(conf.Conf)
-	r := InitializeRoter()
+	r := RegisterRoutes()
 	HttpServer = &http.Server{
 		Addr:           conf.Conf.Server.Address,
 		Handler:        r,
@@ -41,16 +38,4 @@ func Stop() {
 		log.Fatalf("[ERROR] HttpServer Stop err:%v\n", err)
 	}
 	log.Printf("[INFO] HttpServer stop")
-}
-
-func InitializeRoter(middlewares ...gin.HandlerFunc) *gin.Engine {
-	router := gin.Default()
-	router.Use(middlewares...)
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
-	return router
 }
