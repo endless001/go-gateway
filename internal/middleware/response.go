@@ -19,14 +19,14 @@ const (
 )
 
 type Response struct {
-	ErrorCode ResponseCode `josn:errcode`
-	ErrorMsg  string       `json:errmsg`
-	Data      interface{}  `json:data`
+	Code    ResponseCode `josn:code`
+	Message string       `json:message`
+	Data    interface{}  `json:data`
 }
 
 func ResponseError(c *gin.Context, code ResponseCode, err error) {
 
-	resp := &Response{ErrorCode: code, ErrorMsg: err.Error(), Data: ""}
+	resp := &Response{Code: code, Message: err.Error(), Data: ""}
 	c.JSON(200, resp)
 	response, _ := json.Marshal(resp)
 	c.Set("response", string((response)))
@@ -34,7 +34,7 @@ func ResponseError(c *gin.Context, code ResponseCode, err error) {
 }
 
 func ResponseSuccess(c *gin.Context, data interface{}) {
-	resp := &Response{ErrorCode: SuccessCode, ErrorMsg: "", Data: data}
+	resp := &Response{Code: SuccessCode, Message: "", Data: data}
 	c.JSON(200, resp)
 	response, _ := json.Marshal(resp)
 	c.Set("response", string(response))
