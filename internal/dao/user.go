@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-gateway/internal/database"
 	"go-gateway/internal/ent"
@@ -14,7 +15,9 @@ func (d *UserDao) CheckUser(c *gin.Context, userName string) (*ent.User, error) 
 	user, err := database.Client.User.Query().
 		Where(user.UserNameEQ(userName), user.IsDeleteEQ(0)).
 		Only(c)
-
+	if err != nil {
+		return nil, fmt.Errorf("failed querying user: %v", err)
+	}
 	return user, err
 }
 func (d *UserDao) FindUser(c *gin.Context, id int) (*ent.User, error) {
