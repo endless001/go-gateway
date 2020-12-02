@@ -70,7 +70,7 @@ func (u *UserController) Login(c *gin.Context) {
 
 	sessionInfo := &SessionInfo{
 		ID:        user.ID,
-		UserName:  user.Username,
+		UserName:  user.UserName,
 		LoginTime: time.Now(),
 	}
 
@@ -85,7 +85,7 @@ func (u *UserController) Login(c *gin.Context) {
 	session.Set(util.AdminSessionInfoKey, string(json))
 	session.Save()
 
-	result := &LoginResult{Token: user.Username}
+	result := &LoginResult{Token: user.UserName}
 
 	middleware.ResponseSuccess(c, result)
 

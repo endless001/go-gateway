@@ -20,9 +20,9 @@ type UserCreate struct {
 	hooks    []Hook
 }
 
-// SetUsername sets the username field.
-func (uc *UserCreate) SetUsername(s string) *UserCreate {
-	uc.mutation.SetUsername(s)
+// SetUserName sets the user_name field.
+func (uc *UserCreate) SetUserName(s string) *UserCreate {
+	uc.mutation.SetUserName(s)
 	return uc
 }
 
@@ -113,8 +113,8 @@ func (uc *UserCreate) SaveX(ctx context.Context) *User {
 
 // check runs all checks and user-defined validators on the builder.
 func (uc *UserCreate) check() error {
-	if _, ok := uc.mutation.Username(); !ok {
-		return &ValidationError{Name: "username", err: errors.New("ent: missing required field \"username\"")}
+	if _, ok := uc.mutation.UserName(); !ok {
+		return &ValidationError{Name: "user_name", err: errors.New("ent: missing required field \"user_name\"")}
 	}
 	if _, ok := uc.mutation.Salt(); !ok {
 		return &ValidationError{Name: "salt", err: errors.New("ent: missing required field \"salt\"")}
@@ -164,13 +164,13 @@ func (uc *UserCreate) createSpec() (*User, *sqlgraph.CreateSpec) {
 		_node.ID = id
 		_spec.ID.Value = id
 	}
-	if value, ok := uc.mutation.Username(); ok {
+	if value, ok := uc.mutation.UserName(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
 			Value:  value,
-			Column: user.FieldUsername,
+			Column: user.FieldUserName,
 		})
-		_node.Username = value
+		_node.UserName = value
 	}
 	if value, ok := uc.mutation.Salt(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{

@@ -166,7 +166,7 @@ func (lbu *LoadBalanceUpdate) Mutation() *LoadBalanceMutation {
 	return lbu.mutation
 }
 
-// Save executes the query and returns the number of nodes affected by the update operation.
+// Save executes the query and returns the number of rows/vertices matched by this operation.
 func (lbu *LoadBalanceUpdate) Save(ctx context.Context) (int, error) {
 	var (
 		err      error

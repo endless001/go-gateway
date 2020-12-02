@@ -107,7 +107,7 @@ func (tu *TenantUpdate) Mutation() *TenantMutation {
 	return tu.mutation
 }
 
-// Save executes the query and returns the number of nodes affected by the update operation.
+// Save executes the query and returns the number of rows/vertices matched by this operation.
 func (tu *TenantUpdate) Save(ctx context.Context) (int, error) {
 	var (
 		err      error

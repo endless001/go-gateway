@@ -5258,7 +5258,7 @@ type UserMutation struct {
 	op            Op
 	typ           string
 	id            *int
-	username      *string
+	user_name     *string
 	salt          *string
 	password      *string
 	update_at     *time.Time
@@ -5356,41 +5356,41 @@ func (m *UserMutation) ID() (id int, exists bool) {
 	return *m.id, true
 }
 
-// SetUsername sets the username field.
-func (m *UserMutation) SetUsername(s string) {
-	m.username = &s
+// SetUserName sets the user_name field.
+func (m *UserMutation) SetUserName(s string) {
+	m.user_name = &s
 }
 
-// Username returns the username value in the mutation.
-func (m *UserMutation) Username() (r string, exists bool) {
-	v := m.username
+// UserName returns the user_name value in the mutation.
+func (m *UserMutation) UserName() (r string, exists bool) {
+	v := m.user_name
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldUsername returns the old username value of the User.
+// OldUserName returns the old user_name value of the User.
 // If the User object wasn't provided to the builder, the object is fetched
 // from the database.
 // An error is returned if the mutation operation is not UpdateOne, or database query fails.
-func (m *UserMutation) OldUsername(ctx context.Context) (v string, err error) {
+func (m *UserMutation) OldUserName(ctx context.Context) (v string, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, fmt.Errorf("OldUsername is allowed only on UpdateOne operations")
+		return v, fmt.Errorf("OldUserName is allowed only on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, fmt.Errorf("OldUsername requires an ID field in the mutation")
+		return v, fmt.Errorf("OldUserName requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldUsername: %w", err)
+		return v, fmt.Errorf("querying old value for OldUserName: %w", err)
 	}
-	return oldValue.Username, nil
+	return oldValue.UserName, nil
 }
 
-// ResetUsername reset all changes of the "username" field.
-func (m *UserMutation) ResetUsername() {
-	m.username = nil
+// ResetUserName reset all changes of the "user_name" field.
+func (m *UserMutation) ResetUserName() {
+	m.user_name = nil
 }
 
 // SetSalt sets the salt field.
@@ -5613,8 +5613,8 @@ func (m *UserMutation) Type() string {
 // fields that were in/decremented, call AddedFields().
 func (m *UserMutation) Fields() []string {
 	fields := make([]string, 0, 6)
-	if m.username != nil {
-		fields = append(fields, user.FieldUsername)
+	if m.user_name != nil {
+		fields = append(fields, user.FieldUserName)
 	}
 	if m.salt != nil {
 		fields = append(fields, user.FieldSalt)
@@ -5639,8 +5639,8 @@ func (m *UserMutation) Fields() []string {
 // not set, or was not define in the schema.
 func (m *UserMutation) Field(name string) (ent.Value, bool) {
 	switch name {
-	case user.FieldUsername:
-		return m.Username()
+	case user.FieldUserName:
+		return m.UserName()
 	case user.FieldSalt:
 		return m.Salt()
 	case user.FieldPassword:
@@ -5660,8 +5660,8 @@ func (m *UserMutation) Field(name string) (ent.Value, bool) {
 // or the query to the database was failed.
 func (m *UserMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
-	case user.FieldUsername:
-		return m.OldUsername(ctx)
+	case user.FieldUserName:
+		return m.OldUserName(ctx)
 	case user.FieldSalt:
 		return m.OldSalt(ctx)
 	case user.FieldPassword:
@@ -5681,12 +5681,12 @@ func (m *UserMutation) OldField(ctx context.Context, name string) (ent.Value, er
 // type mismatch the field type.
 func (m *UserMutation) SetField(name string, value ent.Value) error {
 	switch name {
-	case user.FieldUsername:
+	case user.FieldUserName:
 		v, ok := value.(string)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetUsername(v)
+		m.SetUserName(v)
 		return nil
 	case user.FieldSalt:
 		v, ok := value.(string)
@@ -5788,8 +5788,8 @@ func (m *UserMutation) ClearField(name string) error {
 // defined in the schema.
 func (m *UserMutation) ResetField(name string) error {
 	switch name {
-	case user.FieldUsername:
-		m.ResetUsername()
+	case user.FieldUserName:
+		m.ResetUserName()
 		return nil
 	case user.FieldSalt:
 		m.ResetSalt()

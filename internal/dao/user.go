@@ -12,7 +12,7 @@ type UserDao struct {
 
 func (d *UserDao) CheckUser(c *gin.Context, userName string) (*ent.User, error) {
 	user, err := database.Client.User.Query().
-		Where(user.UsernameEQ(userName), user.IsDeleteEQ(0)).
+		Where(user.UserNameEQ(userName), user.IsDeleteEQ(0)).
 		Only(c)
 
 	return user, err

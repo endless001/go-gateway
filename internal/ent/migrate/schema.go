@@ -10,7 +10,7 @@ import (
 var (
 	// AccessControlsColumns holds the columns for the "access_controls" table.
 	AccessControlsColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeInt64, Increment: true},
+		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "service_id", Type: field.TypeInt64},
 		{Name: "open_auth", Type: field.TypeInt},
 		{Name: "black_list", Type: field.TypeString},
@@ -28,7 +28,7 @@ var (
 	}
 	// GrpcRulesColumns holds the columns for the "grpc_rules" table.
 	GrpcRulesColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeInt64, Increment: true},
+		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "service_id", Type: field.TypeInt64},
 		{Name: "port", Type: field.TypeInt},
 		{Name: "header_transfor", Type: field.TypeString, Unique: true},
@@ -42,7 +42,7 @@ var (
 	}
 	// HTTPRulesColumns holds the columns for the "http_rules" table.
 	HTTPRulesColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeInt64, Increment: true},
+		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "service_id", Type: field.TypeInt64},
 		{Name: "rule_type", Type: field.TypeInt},
 		{Name: "rule", Type: field.TypeString},
@@ -61,7 +61,7 @@ var (
 	}
 	// LoadBalancesColumns holds the columns for the "load_balances" table.
 	LoadBalancesColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeInt64, Increment: true},
+		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "service_id", Type: field.TypeInt64},
 		{Name: "check_method", Type: field.TypeInt},
 		{Name: "check_timeout", Type: field.TypeInt},
@@ -84,7 +84,7 @@ var (
 	}
 	// ServiceInfosColumns holds the columns for the "service_infos" table.
 	ServiceInfosColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeInt64, Increment: true},
+		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "load_type", Type: field.TypeInt},
 		{Name: "service_name", Type: field.TypeString},
 		{Name: "service_desc", Type: field.TypeString},
@@ -101,7 +101,7 @@ var (
 	}
 	// TCPRulesColumns holds the columns for the "tcp_rules" table.
 	TCPRulesColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeInt64, Increment: true},
+		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "service_id", Type: field.TypeInt64},
 		{Name: "port", Type: field.TypeInt, Unique: true},
 	}
@@ -114,7 +114,7 @@ var (
 	}
 	// TenantsColumns holds the columns for the "tenants" table.
 	TenantsColumns = []*schema.Column{
-		{Name: "id", Type: field.TypeInt64, Increment: true},
+		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "app_id", Type: field.TypeString},
 		{Name: "name", Type: field.TypeString},
 		{Name: "secret", Type: field.TypeString},
@@ -135,7 +135,7 @@ var (
 	// UsersColumns holds the columns for the "users" table.
 	UsersColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "username", Type: field.TypeString},
+		{Name: "user_name", Type: field.TypeString},
 		{Name: "salt", Type: field.TypeString},
 		{Name: "password", Type: field.TypeString},
 		{Name: "update_at", Type: field.TypeTime},

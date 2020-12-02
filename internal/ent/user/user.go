@@ -7,8 +7,8 @@ const (
 	Label = "user"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
-	// FieldUsername holds the string denoting the username field in the database.
-	FieldUsername = "username"
+	// FieldUserName holds the string denoting the user_name field in the database.
+	FieldUserName = "user_name"
 	// FieldSalt holds the string denoting the salt field in the database.
 	FieldSalt = "salt"
 	// FieldPassword holds the string denoting the password field in the database.
@@ -27,7 +27,7 @@ const (
 // Columns holds all SQL columns for user fields.
 var Columns = []string{
 	FieldID,
-	FieldUsername,
+	FieldUserName,
 	FieldSalt,
 	FieldPassword,
 	FieldUpdateAt,

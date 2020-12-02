@@ -14,7 +14,7 @@ type User struct {
 func (User) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int("id"),
-		field.String("username"),
+		field.String("user_name"),
 		field.String("salt"),
 		field.String("password"),
 		field.Time("update_at"),

@@ -18,7 +18,7 @@ func (s *UserService) CheckUser(c *gin.Context, userName, password string) (*ent
 	user, err := s.ud.CheckUser(c, userName)
 
 	if err != nil {
-		return nil, errors.New("用户名不存在!")
+		return nil, err
 	}
 	saltPassword := util.GenSaltPassword(user.Salt, password)
 
