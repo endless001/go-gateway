@@ -11,7 +11,6 @@ import (
 func RequestInLog(c *gin.Context) {
 
 	c.Set("startExecTime", time.Now())
-
 	bodyBytes, _ := ioutil.ReadAll(c.Request.Body)
 	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 

@@ -31,3 +31,9 @@ func (d *UserDao) SaveUser(c *gin.Context, user ent.User) error {
 		Save(c)
 	return err
 }
+func (d *UserDao) UpdateUser(c *gin.Context, user *ent.User) error {
+	_, err := database.Client.User.Update().
+		SetPassword(user.Password).
+		Save(c)
+	return err
+}
