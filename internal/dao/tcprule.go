@@ -16,7 +16,7 @@ func (d *TcpRuleDao) GetTcpRule(c *gin.Context, id int64) (*ent.TcpRule, error) 
 	return model, err
 }
 
-func (d *TcpRuleDao) SaveTcpRule(c *gin.Context, rule ent.TcpRule) error {
+func (d *TcpRuleDao) CreateTcpRule(c *gin.Context, rule *ent.TcpRule) error {
 	_, err := database.Client.TcpRule.Create().
 		SetID(rule.ID).
 		Save(c)

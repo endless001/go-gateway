@@ -16,7 +16,7 @@ func (d *HttpRuleDao) GetHttpRule(c *gin.Context, id int64) (*ent.HttpRule, erro
 	return model, err
 }
 
-func (d *HttpRuleDao) SaveHttpRule(c *gin.Context, rule ent.HttpRule) error {
+func (d *HttpRuleDao) CreateHttpRule(c *gin.Context, rule *ent.HttpRule) error {
 	_, err := database.Client.HttpRule.Create().
 		SetID(rule.ID).
 		Save(c)

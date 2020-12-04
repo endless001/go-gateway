@@ -17,7 +17,7 @@ func (d *AccessControlDao) GetAccessControl(c *gin.Context, id int64) (*ent.Acce
 	return model, err
 }
 
-func (d *AccessControlDao) SaveAccessControl(c *gin.Context, model ent.AccessControl) error {
+func (d *AccessControlDao) CreateAccessControl(c *gin.Context, model *ent.AccessControl) error {
 	_, err := database.Client.AccessControl.Create().
 		SetOpenAuth(model.OpenAuth).
 		Save(c)

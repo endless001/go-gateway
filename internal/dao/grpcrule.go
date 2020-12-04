@@ -16,7 +16,7 @@ func (d *GrpcRuleDao) GetGrpcRule(c *gin.Context, id int64) (*ent.GrpcRule, erro
 	return model, err
 }
 
-func (d *GrpcRuleDao) SaveGrpcRule(c *gin.Context, rule ent.GrpcRule) error {
+func (d *GrpcRuleDao) CreateGrpcRule(c *gin.Context, rule *ent.GrpcRule) error {
 	_, err := database.Client.GrpcRule.Create().
 		SetID(rule.ID).
 		Save(c)
