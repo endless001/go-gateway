@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-gateway/internal/database"
 	"go-gateway/internal/ent"
-	"go-gateway/internal/ent/accesscontrol"
 )
 
 type AccessControlDao struct {
@@ -22,15 +21,4 @@ func (d *AccessControlDao) CreateAccessControl(c *gin.Context, model *ent.Access
 		SetOpenAuth(model.OpenAuth).
 		Save(c)
 	return err
-}
-
-func (d *AccessControlDao) FindAccessControl(c *gin.Context, serviceId int64) ([]*ent.AccessControl, int, error) {
-	list, err := database.Client.AccessControl.Query().
-		Where(accesscontrol.ServiceIDEQ(serviceId)).
-		All(c)
-	if err != nil {
-		return nil, 0, err
-	}
-	count := len(list)
-	return list, count, nil
 }
