@@ -4422,8 +4422,8 @@ type TenantMutation struct {
 	white_ips     *string
 	qpd           *int
 	addqpd        *int
-	_Qps          *int
-	add_Qps       *int
+	qps           *int
+	addqps        *int
 	create_at     *time.Time
 	update_at     *time.Time
 	is_delete     *int8
@@ -4724,22 +4724,22 @@ func (m *TenantMutation) ResetQpd() {
 	m.addqpd = nil
 }
 
-// SetQPS sets the Qps field.
+// SetQPS sets the qps field.
 func (m *TenantMutation) SetQPS(i int) {
-	m._Qps = &i
-	m.add_Qps = nil
+	m.qps = &i
+	m.addqps = nil
 }
 
-// QPS returns the Qps value in the mutation.
+// QPS returns the qps value in the mutation.
 func (m *TenantMutation) QPS() (r int, exists bool) {
-	v := m._Qps
+	v := m.qps
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldQPS returns the old Qps value of the Tenant.
+// OldQPS returns the old qps value of the Tenant.
 // If the Tenant object wasn't provided to the builder, the object is fetched
 // from the database.
 // An error is returned if the mutation operation is not UpdateOne, or database query fails.
@@ -4757,28 +4757,28 @@ func (m *TenantMutation) OldQPS(ctx context.Context) (v int, err error) {
 	return oldValue.QPS, nil
 }
 
-// AddQPS adds i to Qps.
+// AddQPS adds i to qps.
 func (m *TenantMutation) AddQPS(i int) {
-	if m.add_Qps != nil {
-		*m.add_Qps += i
+	if m.addqps != nil {
+		*m.addqps += i
 	} else {
-		m.add_Qps = &i
+		m.addqps = &i
 	}
 }
 
-// AddedQPS returns the value that was added to the Qps field in this mutation.
+// AddedQPS returns the value that was added to the qps field in this mutation.
 func (m *TenantMutation) AddedQPS() (r int, exists bool) {
-	v := m.add_Qps
+	v := m.addqps
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// ResetQPS reset all changes of the "Qps" field.
+// ResetQPS reset all changes of the "qps" field.
 func (m *TenantMutation) ResetQPS() {
-	m._Qps = nil
-	m.add_Qps = nil
+	m.qps = nil
+	m.addqps = nil
 }
 
 // SetCreateAt sets the create_at field.
@@ -4942,7 +4942,7 @@ func (m *TenantMutation) Fields() []string {
 	if m.qpd != nil {
 		fields = append(fields, tenant.FieldQpd)
 	}
-	if m._Qps != nil {
+	if m.qps != nil {
 		fields = append(fields, tenant.FieldQPS)
 	}
 	if m.create_at != nil {
@@ -5090,7 +5090,7 @@ func (m *TenantMutation) AddedFields() []string {
 	if m.addqpd != nil {
 		fields = append(fields, tenant.FieldQpd)
 	}
-	if m.add_Qps != nil {
+	if m.addqps != nil {
 		fields = append(fields, tenant.FieldQPS)
 	}
 	if m.addis_delete != nil {

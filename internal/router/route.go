@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-gateway/internal/controller"
 	"go-gateway/internal/middleware"
+	"go-gateway/internal/middleware/auth"
 	"log"
 )
 
@@ -27,7 +28,7 @@ func RegisterRoutes(middlewares ...gin.HandlerFunc) *gin.Engine {
 	}
 
 	userRouter := router.Group("/user")
-
+	tenantRouter := router.Group("/teant")
 	userRouter.Use(sessions.Sessions("session", store),
 		middleware.RecoveryMiddleware(),
 		middleware.RequestLog(),
@@ -35,7 +36,14 @@ func RegisterRoutes(middlewares ...gin.HandlerFunc) *gin.Engine {
 	{
 		controller.UserRegister(userRouter)
 	}
+	tenantRouter.Use(middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		auth.SessionAuthMiddleware(),
+		middleware.TranslationMiddleware())
 
+	{
+		controller.TenantRegister(tenantRouter)
+	}
 	return router
 
 }

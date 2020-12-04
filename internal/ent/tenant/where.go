@@ -127,7 +127,7 @@ func Qpd(v int) predicate.Tenant {
 	})
 }
 
-// QPS applies equality check predicate on the "Qps" field. It's identical to QPSEQ.
+// QPS applies equality check predicate on the "qps" field. It's identical to QPSEQ.
 func QPS(v int) predicate.Tenant {
 	return predicate.Tenant(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldQPS), v))
@@ -675,21 +675,21 @@ func QpdLTE(v int) predicate.Tenant {
 	})
 }
 
-// QPSEQ applies the EQ predicate on the "Qps" field.
+// QPSEQ applies the EQ predicate on the "qps" field.
 func QPSEQ(v int) predicate.Tenant {
 	return predicate.Tenant(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldQPS), v))
 	})
 }
 
-// QPSNEQ applies the NEQ predicate on the "Qps" field.
+// QPSNEQ applies the NEQ predicate on the "qps" field.
 func QPSNEQ(v int) predicate.Tenant {
 	return predicate.Tenant(func(s *sql.Selector) {
 		s.Where(sql.NEQ(s.C(FieldQPS), v))
 	})
 }
 
-// QPSIn applies the In predicate on the "Qps" field.
+// QPSIn applies the In predicate on the "qps" field.
 func QPSIn(vs ...int) predicate.Tenant {
 	v := make([]interface{}, len(vs))
 	for i := range v {
@@ -706,7 +706,7 @@ func QPSIn(vs ...int) predicate.Tenant {
 	})
 }
 
-// QPSNotIn applies the NotIn predicate on the "Qps" field.
+// QPSNotIn applies the NotIn predicate on the "qps" field.
 func QPSNotIn(vs ...int) predicate.Tenant {
 	v := make([]interface{}, len(vs))
 	for i := range v {
@@ -723,28 +723,28 @@ func QPSNotIn(vs ...int) predicate.Tenant {
 	})
 }
 
-// QPSGT applies the GT predicate on the "Qps" field.
+// QPSGT applies the GT predicate on the "qps" field.
 func QPSGT(v int) predicate.Tenant {
 	return predicate.Tenant(func(s *sql.Selector) {
 		s.Where(sql.GT(s.C(FieldQPS), v))
 	})
 }
 
-// QPSGTE applies the GTE predicate on the "Qps" field.
+// QPSGTE applies the GTE predicate on the "qps" field.
 func QPSGTE(v int) predicate.Tenant {
 	return predicate.Tenant(func(s *sql.Selector) {
 		s.Where(sql.GTE(s.C(FieldQPS), v))
 	})
 }
 
-// QPSLT applies the LT predicate on the "Qps" field.
+// QPSLT applies the LT predicate on the "qps" field.
 func QPSLT(v int) predicate.Tenant {
 	return predicate.Tenant(func(s *sql.Selector) {
 		s.Where(sql.LT(s.C(FieldQPS), v))
 	})
 }
 
-// QPSLTE applies the LTE predicate on the "Qps" field.
+// QPSLTE applies the LTE predicate on the "qps" field.
 func QPSLTE(v int) predicate.Tenant {
 	return predicate.Tenant(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldQPS), v))

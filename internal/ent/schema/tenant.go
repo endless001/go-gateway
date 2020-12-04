@@ -19,7 +19,7 @@ func (Tenant) Fields() []ent.Field {
 		field.String("secret"),
 		field.String("white_ips"),
 		field.Int("qpd"),
-		field.Int("Qps"),
+		field.Int("qps"),
 		field.Time("create_at"),
 		field.Time("update_at"),
 		field.Int8("is_delete").

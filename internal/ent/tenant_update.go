@@ -64,14 +64,14 @@ func (tu *TenantUpdate) AddQpd(i int) *TenantUpdate {
 	return tu
 }
 
-// SetQPS sets the Qps field.
+// SetQPS sets the qps field.
 func (tu *TenantUpdate) SetQPS(i int) *TenantUpdate {
 	tu.mutation.ResetQPS()
 	tu.mutation.SetQPS(i)
 	return tu
 }
 
-// AddQPS adds i to Qps.
+// AddQPS adds i to qps.
 func (tu *TenantUpdate) AddQPS(i int) *TenantUpdate {
 	tu.mutation.AddQPS(i)
 	return tu
@@ -315,14 +315,14 @@ func (tuo *TenantUpdateOne) AddQpd(i int) *TenantUpdateOne {
 	return tuo
 }
 
-// SetQPS sets the Qps field.
+// SetQPS sets the qps field.
 func (tuo *TenantUpdateOne) SetQPS(i int) *TenantUpdateOne {
 	tuo.mutation.ResetQPS()
 	tuo.mutation.SetQPS(i)
 	return tuo
 }
 
-// AddQPS adds i to Qps.
+// AddQPS adds i to qps.
 func (tuo *TenantUpdateOne) AddQPS(i int) *TenantUpdateOne {
 	tuo.mutation.AddQPS(i)
 	return tuo

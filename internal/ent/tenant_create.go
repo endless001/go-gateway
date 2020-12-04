@@ -50,7 +50,7 @@ func (tc *TenantCreate) SetQpd(i int) *TenantCreate {
 	return tc
 }
 
-// SetQPS sets the Qps field.
+// SetQPS sets the qps field.
 func (tc *TenantCreate) SetQPS(i int) *TenantCreate {
 	tc.mutation.SetQPS(i)
 	return tc
@@ -147,7 +147,7 @@ func (tc *TenantCreate) check() error {
 		return &ValidationError{Name: "qpd", err: errors.New("ent: missing required field \"qpd\"")}
 	}
 	if _, ok := tc.mutation.QPS(); !ok {
-		return &ValidationError{Name: "Qps", err: errors.New("ent: missing required field \"Qps\"")}
+		return &ValidationError{Name: "qps", err: errors.New("ent: missing required field \"qps\"")}
 	}
 	if _, ok := tc.mutation.CreateAt(); !ok {
 		return &ValidationError{Name: "create_at", err: errors.New("ent: missing required field \"create_at\"")}

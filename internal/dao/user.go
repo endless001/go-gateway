@@ -20,14 +20,14 @@ func (d *UserDao) CheckUser(c *gin.Context, userName string) (*ent.User, error) 
 	}
 	return user, err
 }
-func (d *UserDao) FindUser(c *gin.Context, id int) (*ent.User, error) {
-	model, err := database.Client.User.Query().
-		Where(user.IDEQ(id)).
-		Only(c)
+
+func (d *UserDao) GetUser(c *gin.Context, id int) (*ent.User, error) {
+	model, err := database.Client.User.
+		Get(c, id)
 	return model, err
 }
 
-func (d *UserDao) SaveUser(c *gin.Context, user ent.User) error {
+func (d *UserDao) CreateUser(c *gin.Context, user ent.User) error {
 	_, err := database.Client.User.Create().
 		SetID(user.ID).
 		SetCreateAt(user.CreateAt).

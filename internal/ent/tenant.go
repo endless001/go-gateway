@@ -26,8 +26,8 @@ type Tenant struct {
 	WhiteIps string `json:"white_ips,omitempty"`
 	// Qpd holds the value of the "qpd" field.
 	Qpd int `json:"qpd,omitempty"`
-	// QPS holds the value of the "Qps" field.
-	QPS int `json:"Qps,omitempty"`
+	// QPS holds the value of the "qps" field.
+	QPS int `json:"qps,omitempty"`
 	// CreateAt holds the value of the "create_at" field.
 	CreateAt time.Time `json:"create_at,omitempty"`
 	// UpdateAt holds the value of the "update_at" field.
@@ -45,7 +45,7 @@ func (*Tenant) scanValues() []interface{} {
 		&sql.NullString{}, // secret
 		&sql.NullString{}, // white_ips
 		&sql.NullInt64{},  // qpd
-		&sql.NullInt64{},  // Qps
+		&sql.NullInt64{},  // qps
 		&sql.NullTime{},   // create_at
 		&sql.NullTime{},   // update_at
 		&sql.NullInt64{},  // is_delete
@@ -90,7 +90,7 @@ func (t *Tenant) assignValues(values ...interface{}) error {
 		t.Qpd = int(value.Int64)
 	}
 	if value, ok := values[5].(*sql.NullInt64); !ok {
-		return fmt.Errorf("unexpected type %T for field Qps", values[5])
+		return fmt.Errorf("unexpected type %T for field qps", values[5])
 	} else if value.Valid {
 		t.QPS = int(value.Int64)
 	}
@@ -145,7 +145,7 @@ func (t *Tenant) String() string {
 	builder.WriteString(t.WhiteIps)
 	builder.WriteString(", qpd=")
 	builder.WriteString(fmt.Sprintf("%v", t.Qpd))
-	builder.WriteString(", Qps=")
+	builder.WriteString(", qps=")
 	builder.WriteString(fmt.Sprintf("%v", t.QPS))
 	builder.WriteString(", create_at=")
 	builder.WriteString(t.CreateAt.Format(time.ANSIC))

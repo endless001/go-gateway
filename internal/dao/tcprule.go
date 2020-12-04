@@ -10,10 +10,9 @@ import (
 type TcpRuleDao struct {
 }
 
-func (d *TcpRuleDao) FindTcpRule(c *gin.Context, id int64) (*ent.TcpRule, error) {
-	model, err := database.Client.TcpRule.Query().
-		Where(tcprule.ID(id)).
-		Only(c)
+func (d *TcpRuleDao) GetTcpRule(c *gin.Context, id int64) (*ent.TcpRule, error) {
+	model, err := database.Client.TcpRule.
+		Get(c, id)
 	return model, err
 }
 
@@ -24,7 +23,7 @@ func (d *TcpRuleDao) SaveTcpRule(c *gin.Context, rule ent.TcpRule) error {
 	return err
 }
 
-func (d *TcpRuleDao) GetTcpRule(c *gin.Context, serviceId int64) ([]*ent.TcpRule, int, error) {
+func (d *TcpRuleDao) FindTcpRule(c *gin.Context, serviceId int64) ([]*ent.TcpRule, int, error) {
 	list, err := database.Client.TcpRule.Query().
 		Where(tcprule.ServiceIDEQ(serviceId)).
 		All(c)

@@ -10,10 +10,9 @@ import (
 type AccessControlDao struct {
 }
 
-func (d *AccessControlDao) FindAccessControl(c *gin.Context, serviceId int64) (*ent.AccessControl, error) {
-	model, err := database.Client.AccessControl.Query().
-		Where(accesscontrol.ServiceIDEQ(serviceId)).
-		Only(c)
+func (d *AccessControlDao) GetAccessControl(c *gin.Context, id int64) (*ent.AccessControl, error) {
+	model, err := database.Client.AccessControl.
+		Get(c, id)
 
 	return model, err
 }
@@ -25,7 +24,7 @@ func (d *AccessControlDao) SaveAccessControl(c *gin.Context, model ent.AccessCon
 	return err
 }
 
-func (d *AccessControlDao) GetAccessControl(c *gin.Context, serviceId int64) ([]*ent.AccessControl, int, error) {
+func (d *AccessControlDao) FindAccessControl(c *gin.Context, serviceId int64) ([]*ent.AccessControl, int, error) {
 	list, err := database.Client.AccessControl.Query().
 		Where(accesscontrol.ServiceIDEQ(serviceId)).
 		All(c)

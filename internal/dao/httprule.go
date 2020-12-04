@@ -10,10 +10,9 @@ import (
 type HttpRuleDao struct {
 }
 
-func (d *HttpRuleDao) FindHttpRule(c *gin.Context, id int64) (*ent.HttpRule, error) {
-	model, err := database.Client.HttpRule.Query().
-		Where(httprule.ID(id)).
-		Only(c)
+func (d *HttpRuleDao) GetHttpRule(c *gin.Context, id int64) (*ent.HttpRule, error) {
+	model, err := database.Client.HttpRule.
+		Get(c, id)
 	return model, err
 }
 
@@ -24,7 +23,7 @@ func (d *HttpRuleDao) SaveHttpRule(c *gin.Context, rule ent.HttpRule) error {
 	return err
 }
 
-func (d *HttpRuleDao) GetHttpRule(c *gin.Context, serviceId int64) ([]*ent.HttpRule, int, error) {
+func (d *HttpRuleDao) FindHttpRule(c *gin.Context, serviceId int64) ([]*ent.HttpRule, int, error) {
 	list, err := database.Client.HttpRule.Query().
 		Where(httprule.ServiceIDEQ(serviceId)).
 		All(c)
