@@ -29,14 +29,19 @@ func RegisterRoutes(middlewares ...gin.HandlerFunc) *gin.Engine {
 
 	userRouter := router.Group("/user")
 	tenantRouter := router.Group("/teant")
-	userRouter.Use(sessions.Sessions("session", store),
+	serviceRouter := router.Group("/service")
+	dashboardRouter := router.Group("/service")
+
+	userRouter.Use(
+		sessions.Sessions("session", store),
 		middleware.RecoveryMiddleware(),
 		middleware.RequestLog(),
 		middleware.TranslationMiddleware())
 	{
 		controller.UserRegister(userRouter)
 	}
-	tenantRouter.Use(middleware.RecoveryMiddleware(),
+	tenantRouter.Use(
+		middleware.RecoveryMiddleware(),
 		middleware.RequestLog(),
 		auth.SessionAuthMiddleware(),
 		middleware.TranslationMiddleware())
@@ -44,6 +49,28 @@ func RegisterRoutes(middlewares ...gin.HandlerFunc) *gin.Engine {
 	{
 		controller.TenantRegister(tenantRouter)
 	}
+	serviceRouter.Use(
+		sessions.Sessions("session", store),
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		auth.SessionAuthMiddleware(),
+		middleware.TranslationMiddleware())
+
+	{
+		controller.ServiceRegister(serviceRouter)
+	}
+
+	dashboardRouter.Use(
+		sessions.Sessions("session", store),
+		middleware.RecoveryMiddleware(),
+		middleware.RequestLog(),
+		auth.SessionAuthMiddleware(),
+		middleware.TranslationMiddleware())
+
+	{
+		controller.DashboardRegister(dashboardRouter)
+	}
+
 	return router
 
 }
